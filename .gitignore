@@ -1,0 +1,30 @@
+### Maven ###
+target/
+*.log
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+### OS / Windows ###
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### Java ###
+*.class
+
+### Allure ###
+allure-results/
+allure-report/
+.allure/
+
+### Temporary ###
+*.tmp
+*.swp
+*.bak
+
