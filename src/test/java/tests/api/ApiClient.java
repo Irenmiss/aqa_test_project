@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 
 import java.util.UUID;
 
+import tests.helpers.AllureContextHolder;
 import tests.helpers.AllureHelper;
 
 /**
@@ -61,6 +62,7 @@ public final class ApiClient {
                 .post(Endpoints.APP_ENDPOINT);
 
         AllureHelper.attachResponse("APP /endpoint " + action, response);
+        AllureContextHolder.lastResponse = response;
         return response;
     }
 }

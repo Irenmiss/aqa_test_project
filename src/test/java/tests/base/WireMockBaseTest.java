@@ -1,8 +1,10 @@
 package tests.base;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.*;
 import tests.api.Endpoints;
+import tests.helpers.AllureContextHolder;
 import tests.helpers.AllureHelper;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
@@ -49,6 +51,25 @@ public abstract class WireMockBaseTest {
         if (wireMockServer != null) {
             wireMockServer.stop();
         }
+    }
+
+    @AfterEach
+    void logFinalResponse(TestInfo testInfo) {
+        if (AllureContextHolder.lastResponse == null) {
+            return;
+        }
+
+        var response = AllureContextHolder.lastResponse;
+
+        String result = response.jsonPath().getString("result");
+        String message = response.jsonPath().getString("message");
+
+        Allure.step(
+                "Результаты теста: " +
+                        "Код ответа: " + response.statusCode() +
+                        ", Значение result: " + result +
+                        ", Значение message: " + message
+        );
     }
 
     //Вспомогательные методы для настройки заглушек
